@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Generate photovoltaic reliability test reports from flash-test data.">
+  <title>3S PV Reliability Report Builder</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#" aria-label="3S report builder home">
+      <img src="3S logo and colors.jpg" alt="3S company logo">
+    </a>
+    <div class="topbar-copy">
+      <span class="eyebrow">PV QUALITY OPERATIONS</span>
+      <strong>Reliability Report Builder</strong>
+    </div>
+    <div class="secure-badge"><span></span>Local processing</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">FLASH DATA → DECISION-READY REPORT</p>
+        <h1>Performance evidence,<br><em>assembled in seconds.</em></h1>
+        <p class="hero-copy">Pair measurements before and after reliability testing, review every degradation value, and export a polished Excel report with traceable raw data and EL imagery.</p>
+      </div>
+      <aside class="rule-card" aria-label="Pass criteria">
+        <div class="rule-icon">✓</div>
+        <div><span>PASS CRITERION</span><strong>Every variation ≥ −5.00%</strong><small>Pmax · Vmpp · Impp · Voc · Isc · FF</small></div>
+      </aside>
+    </section>
+
+    <section class="workflow" aria-label="Report inputs">
+      <div class="step active"><b>1</b><span>Import data</span></div><i></i>
+      <div class="step"><b>2</b><span>Attach images</span></div><i></i>
+      <div class="step"><b>3</b><span>Review & export</span></div>
+    </section>
+
+    <section class="panel inputs-panel">
+      <div class="panel-heading"><div><span class="section-number">01</span><h2>Measurement files</h2></div><p>Comma-delimited flash tester exports (.txt)</p></div>
+      <div class="drop-grid">
+        <label class="dropzone" id="initialDrop">
+          <input id="initialFile" type="file" accept=".txt,text/plain">
+          <span class="file-icon">IN</span>
+          <strong>Initial measurements</strong>
+          <small>Before reliability test</small>
+          <span class="choose">Choose TXT file</span>
+          <output id="initialName">No file selected</output>
+        </label>
+        <div class="pair-arrow">→</div>
+        <label class="dropzone" id="finalDrop">
+          <input id="finalFile" type="file" accept=".txt,text/plain">
+          <span class="file-icon final">OUT</span>
+          <strong>Final measurements</strong>
+          <small>After reliability test</small>
+          <span class="choose">Choose TXT file</span>
+          <output id="finalName">No file selected</output>
+        </label>
+      </div>
+      <button class="demo-link" id="loadDemo" type="button">Use the 3-module example files</button>
+    </section>
+
+    <section class="panel image-panel">
+      <div class="panel-heading"><div><span class="section-number">02</span><h2>EL & visual evidence</h2></div><p>Optional · JPG or PNG · filenames must include serial and “init” or “final”</p></div>
+      <label class="compact-upload">
+        <input id="imageFiles" type="file" accept="image/jpeg,image/png" multiple>
+        <span>＋</span><div><strong>Add module images</strong><small>Example: FuE 1016 init.jpg</small></div><b>Browse</b>
+      </label>
+      <div id="imageList" class="image-list" aria-live="polite"><span>No images attached</span></div>
+      <button class="demo-link" id="loadDemoImages" type="button">Use the 6 example images</button>
+    </section>
+
+    <section id="results" class="panel results-panel hidden" aria-live="polite">
+      <div class="panel-heading"><div><span class="section-number">03</span><h2>Performance review</h2></div><div id="overallBadge" class="status-badge"></div></div>
+      <div id="summaryCards" class="summary-cards"></div>
+      <div class="chart-wrap"><canvas id="variationChart" width="1200" height="430" aria-label="Parameter variation chart"></canvas></div>
+      <div class="table-scroll"><table><thead><tr><th>Serial number</th><th>Parameter</th><th>Initial</th><th>Final</th><th>Variation</th><th>Result</th></tr></thead><tbody id="resultsBody"></tbody></table></div>
+    </section>
+
+    <section class="export-bar">
+      <div><strong>Ready to build the report?</strong><span id="exportHint">Select both measurement files to continue.</span></div>
+      <button id="generateBtn" type="button" disabled><span>Generate Excel report</span><b>↓ XLSX</b></button>
+    </section>
+    <div id="message" class="message hidden" role="alert"></div>
+  </main>
+
+  <footer><span>3S Solar Solutions Switzerland</span><span>Data stays in your browser · No upload to a server</span></footer>
+</body>
+</html>
