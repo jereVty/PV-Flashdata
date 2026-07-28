@@ -1,0 +1,4 @@
+Date,Time,InstanceName,User,MeasStat,MachStat,Snr,Voc,Isc,Pmax,Vpmax,Ipmax,Rs,Rsh,FF,Eff,Tdut,Gavg,LTI,Class,ClassBin,Fcp,FcsCC,FcsMC,Fcv
+2025-10-02,10:54:33,TERRASLATE L,eng - ENGINEER,Ok,Ok,FuE 1017,  32.697,   6.109, 160.582,  27.372,   5.867,   0.4282, 411.8469,  80.3971,  13.2822,  23.5,1000.1,   0.0007,N/A - C-Ware - 31016375 TeraSlate Black 6DL-225,N/A,   0.9949,   0.9710,   0.9547,   0.9981
+2025-10-02,10:56:13,TERRASLATE L,eng - ENGINEER,Ok,Ok,FuE 1016,  32.717,   6.207, 163.342,  27.384,   5.965,   0.4253, 336.3589,  80.4291,  13.5105,  23.4,1000.2,   0.0009,N/A - C-Ware - 31016375 TeraSlate Black 6DL-225,N/A,   0.9949,   0.9710,   0.9547,   0.9981
+2025-10-02,10:57:16,TERRASLATE L,eng - ENGINEER,Ok,Ok,FuE 1008,  33.074,   8.048, 210.011,  27.369,   7.673,   0.3653, 302.6838,  78.8995,  17.3707,  23.5,1000.3,   0.0008,N/A - C-Ware - 31016375 TeraSlate Black 6DL-225,N/A,   0.9949,   0.9710,   0.9547,   0.9981
