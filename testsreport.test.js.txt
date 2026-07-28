@@ -1,0 +1,36 @@
+diff --git a/tests/report.test.js b/tests/report.test.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..04b1cc56fb77d8a80a415fbe0be6d87e6411821e
+--- /dev/null
++++ b/tests/report.test.js
+@@ -0,0 +1,30 @@
++import test from 'node:test';
++import assert from 'node:assert/strict';
++import { parseFlashData, compareMeasurements, matchImages } from '../report.js';
++import { readFile } from 'node:fs/promises';
++
++test('parses and pairs the repository Flashdata examples', async () => {
++  const initial = parseFlashData(await readFile('2025-04-24 Flashdata.txt', 'utf8'));
++  const final = parseFlashData(await readFile('2025-10-02 Flashdata.txt', 'utf8'));
++  const result = compareMeasurements(initial, final);
++  assert.equal(result.length, 3);
++  assert.deepEqual(result.map(row => row.serial), ['FuE 1016', 'FuE 1008', 'FuE 1017']);
++  assert.ok(result.every(row => row.parameters.length === 6));
++  assert.ok(result.every(row => row.passed));
++  assert.ok(Math.abs(result[0].parameters[0].variation - -0.91957) < 0.001);
++});
++
++test('fails a module when any parameter reaches the threshold', () => {
++  const initial = parseFlashData('Date,Snr,Pmax,Vpmax,Ipmax,Voc,Isc,FF\n2026-01-01,A,100,10,10,20,5,80');
++  const final = parseFlashData('Date,Snr,Pmax,Vpmax,Ipmax,Voc,Isc,FF\n2026-02-01,A,95,10,10,20,5,80');
++  const [result] = compareMeasurements(initial, final);
++  assert.equal(result.passed, false);
++  assert.equal(result.parameters[0].passed, false);
++});
++
++test('matches initial and final pictures without accents or punctuation', () => {
++  const files = [{ name: 'FuE 1016 init.jpg' }, { name: 'FuE-1016 after.jpg' }];
++  const matched = matchImages(files, ['FuE 1016']);
++  assert.equal(matched['FuE 1016'].initial, files[0]);
++  assert.equal(matched['FuE 1016'].final, files[1]);
++});

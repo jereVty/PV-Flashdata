@@ -1,0 +1,12 @@
+diff --git a/package.json b/package.json
+new file mode 100644
+index 0000000000000000000000000000000000000000..6c2e31e05f66222210289a0836d8ac712f0281fe
+--- /dev/null
++++ b/package.json
+@@ -0,0 +1,6 @@
++{
++  "name": "pv-report-studio",
++  "private": true,
++  "type": "module",
++  "scripts": { "test": "node --test", "start": "python3 -m http.server 4173" }
++}

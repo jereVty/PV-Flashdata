@@ -1,0 +1,78 @@
+diff --git a/index.html b/index.html
+new file mode 100644
+index 0000000000000000000000000000000000000000..6a24f5276552961eb324548fe59491ff31742ae9
+--- /dev/null
++++ b/index.html
+@@ -0,0 +1,72 @@
++<!doctype html>
++<html lang="en">
++<head>
++  <meta charset="UTF-8">
++  <meta name="viewport" content="width=device-width, initial-scale=1.0">
++  <meta name="description" content="Local photovoltaic performance report generator">
++  <title>PV Report Studio</title>
++  <link rel="preconnect" href="https://fonts.googleapis.com">
++  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
++  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
++  <link rel="stylesheet" href="styles.css">
++</head>
++<body>
++  <header class="topbar">
++    <a class="brand" href="#"><span class="brand-mark">3S</span><span>PV Report <b>Studio</b></span></a>
++    <span class="privacy"><i></i> 100% local processing</span>
++  </header>
++
++  <main>
++    <section class="hero">
++      <div class="eyebrow">RELIABILITY REPORT · FLASH TEST</div>
++      <h1>From raw measurements to a report<br><em>ready to share.</em></h1>
++      <p>Compare the initial and final performance of your photovoltaic modules, verify the degradation threshold and export a complete Excel report.</p>
++      <div class="steps"><span class="active">1 <b>Upload</b></span><hr><span>2 <b>Review</b></span><hr><span>3 <b>Export</b></span></div>
++    </section>
++
++    <section class="workspace">
++      <div class="section-title"><div><span>01</span><h2>Test data</h2></div><button id="demoBtn" class="ghost">Use sample files</button></div>
++      <div class="upload-grid">
++        <label class="dropzone" id="initialZone">
++          <input id="initialFile" type="file" accept=".txt,.csv">
++          <span class="file-icon">↥</span><span class="tag">BEFORE TEST</span>
++          <strong>Initial data</strong><small>Drop the Flashdata .txt file here</small>
++          <span class="file-state">Choose a file</span>
++        </label>
++        <label class="dropzone" id="finalZone">
++          <input id="finalFile" type="file" accept=".txt,.csv">
++          <span class="file-icon">↥</span><span class="tag final">AFTER TEST</span>
++          <strong>Final data</strong><small>Drop the Flashdata .txt file here</small>
++          <span class="file-state">Choose a file</span>
++        </label>
++      </div>
++      <div class="options-row">
++        <label><span>Test name</span><input id="testName" value="DH1000" placeholder="e.g. DH1000"></label>
++        <label class="image-upload"><span>EL images (optional)</span><input id="images" type="file" accept="image/jpeg,image/png" multiple><b id="imageLabel">Select initial and final images</b><small>Expected filename: "serial number init/final.jpg"</small></label>
++      </div>
++      <div id="message" class="message" role="alert" hidden></div>
++    </section>
++
++    <section id="results" class="results" hidden>
++      <div class="section-title"><div><span>02</span><h2>Analysis results</h2></div><div id="globalBadge" class="result-badge"></div></div>
++      <div class="summary-grid">
++        <article><small>MODULES ANALYSED</small><strong id="moduleCount">0</strong><span>matched serial numbers</span></article>
++        <article><small>ACCEPTANCE THRESHOLD</small><strong>−5.00%</strong><span>for each of the 6 parameters</span></article>
++        <article><small>WORST DEGRADATION</small><strong id="worstValue">—</strong><span id="worstLabel">—</span></article>
++      </div>
++      <div class="chart-card">
++        <div class="card-heading"><div><h3>Performance variation</h3><p>Final values compared with initial measurements</p></div><div class="legend"><i></i> Variation <span></span> −5% threshold</div></div>
++        <div class="canvas-wrap"><canvas id="chart" width="1200" height="440" aria-label="Performance variation chart"></canvas></div>
++      </div>
++      <div class="table-card">
++        <div class="card-heading"><div><h3>Measurement details</h3><p>Initial values, final values and variations by module</p></div></div>
++        <div class="table-wrap"><table><thead><tr><th>Module</th><th>Parameter</th><th>Initial</th><th>Final</th><th>Variation</th><th>Status</th></tr></thead><tbody id="resultsBody"></tbody></table></div>
++      </div>
++      <div class="export-bar"><div><strong>Your report is ready</strong><span>3 worksheets: Raw Data, Data Results <span id="testNameEcho">DH1000</span>, EL and Visual</span></div><button id="exportBtn">Download Excel report <span>↓</span></button></div>
++    </section>
++  </main>
++  <footer><span>3S · Solar Performance Lab</span><span>Your files never leave your browser.</span></footer>
++  <script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js"></script>
++  <script type="module" src="app.js"></script>
++</body>
++</html>
