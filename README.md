@@ -4,11 +4,39 @@ A browser-based tool that compares initial and final photovoltaic flash-test exp
 
 ## Run locally
 
+From any terminal, run the launcher by using its full path:
+
 ```bash
-python3 -m http.server 8000
+python3 /workspace/PV-Flashdata/server.py
 ```
 
-Open `http://localhost:8000`, select the two `.txt` exports, optionally attach EL images, review the results, and generate the workbook.
+The launcher always serves the directory containing the application, opens the correct
+`index.html` page automatically, and prints its address. This avoids the **Directory
+listing for /** page that appears when a generic web server is started from the wrong
+folder.
+
+If a browser cannot be opened automatically, visit:
+
+```text
+http://127.0.0.1:8000/index.html
+```
+
+To start it without opening a browser, or to choose another port, use:
+
+```bash
+python3 /workspace/PV-Flashdata/server.py --no-browser
+python3 /workspace/PV-Flashdata/server.py --port 8080
+```
+
+Alternatively, the standard Python server works when the application directory is
+provided explicitly:
+
+```bash
+python3 -m http.server 8000 --directory /workspace/PV-Flashdata
+```
+
+Select the two `.txt` exports, optionally attach EL images, review the results, and
+generate the workbook. Press `Ctrl+C` in the terminal to stop the server.
 
 ## Report rules
 
