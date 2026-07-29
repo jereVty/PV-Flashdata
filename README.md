@@ -4,15 +4,11 @@ A browser-based tool that compares initial and final photovoltaic flash-test exp
 
 ## Run locally
 
-Open a terminal in the repository directory and run the launcher with a relative path:
+From any terminal, run the launcher by using its full path:
 
 ```bash
-python3 server.py
+python3 /workspace/PV-Flashdata/server.py
 ```
-
-For example, if the terminal prompt already ends with `PV-Flashdata (main) $`, run
-only `python3 server.py`. Do not copy an absolute `/workspace/...` path because the
-parent directory is environment-dependent and may instead be `/workspaces/...`.
 
 The launcher always serves the directory containing the application, opens the correct
 `index.html` page automatically, and prints its address. This avoids the **Directory
@@ -28,14 +24,15 @@ http://127.0.0.1:8000/index.html
 To start it without opening a browser, or to choose another port, use:
 
 ```bash
-python3 server.py --no-browser
-python3 server.py --port 8080
+python3 /workspace/PV-Flashdata/server.py --no-browser
+python3 /workspace/PV-Flashdata/server.py --port 8080
 ```
 
-Alternatively, the standard Python server works from the repository directory:
+Alternatively, the standard Python server works when the application directory is
+provided explicitly:
 
 ```bash
-python3 -m http.server 8000 --directory .
+python3 -m http.server 8000 --directory /workspace/PV-Flashdata
 ```
 
 Select the two `.txt` exports, optionally attach EL images, review the results, and
